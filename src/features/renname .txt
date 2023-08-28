@@ -1,0 +1,1 @@
+rename the name of product-list to product
