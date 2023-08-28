@@ -9,44 +9,29 @@ import {
   selectItems,
   updateCartAsync,
 } from '../features/cart/cartSlice.js';
-
-const addresses = [
-  {
-    name: 'Faisal khan',
-    street: '11th main',
-    city: 'mumbai',
-    pinCode: 400070,
-    state: 'Maharashtra',
-    phone: 1213131313131,
-  },
-  {
-    name: 'Karan',
-    street: '11th main',
-    city: 'mumbai',
-    pinCode: 400070,
-    state: 'Maharashtra',
-    phone: 1213131313131,
-  },
-  {
-    name: 'ruby',
-    street: '11th main',
-    city: 'mumbai',
-    pinCode: 400070,
-    state: 'Maharashtra',
-    phone: 1213131313131,
-  },
-];
+import {
+  selectLoggedInUser,
+  updateUserAsync,
+} from '../features/auth/authSlice.js';
+import {
+  createOrderAsync,
+  selectCurrentOrder,
+} from '../features/order/orderSlice.js';
 
 function Checkout() {
   const [open, setOpen] = useState(true);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState('cash');
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
-
+  const user = useSelector(selectLoggedInUser);
   const items = useSelector(selectItems);
+  const currentOrder = useSelector(selectCurrentOrder);
   const totalAmount = items.reduce(
     (amount, item) => item.price * item.quantity + amount,
     0
@@ -61,9 +46,39 @@ function Checkout() {
     dispatch(deleteItemFromCartAsync(id));
   };
 
+  // handle radio button for address
+  const handleAddress = (e) => {
+    setSelectedAddress(user.addresses[e.target.value]);
+  };
+  // handle radio button for Payment Method
+  const handlePayment = (e) => {
+    setPaymentMethod(e.target.value);
+  };
+  // handle  button for Place the order
+  const handleOrder = (e) => {
+    const order = {
+      items,
+      totalAmount,
+      totalItems,
+      user,
+      paymentMethod,
+      selectedAddress,
+      status: 'pending',
+    };
+    dispatch(createOrderAsync(order));
+    //TODO : redirect to order-success page
+    //TODO : clear cart after order
+    // TODO :  on server change the stock number of items
+  };
+
   return (
     <>
       {!items.length && <Navigate to='/' replace={true}></Navigate>}
+      {currentOrder && (
+        <Navigate
+          to={`/order-success/${currentOrder.id}`}
+          replace={true}></Navigate>
+      )}
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <div className='grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5'>
           <div className='lg:col-span-3'>
@@ -72,8 +87,13 @@ function Checkout() {
               noValidate
               onSubmit={handleSubmit((data) => {
                 console.log(data);
-                dispatch();
-                // checkUserAsync({ email: data.email, password: data.password })
+                dispatch(
+                  updateUserAsync({
+                    ...user,
+                    addresses: [...user.addresses, data],
+                  })
+                );
+                reset();
               })}>
               <div className='space-y-12'>
                 <div className='border-b border-gray-900/10 pb-12'>
@@ -235,14 +255,16 @@ function Checkout() {
                     Choose from Existing addresses
                   </p>
                   <ul role='list'>
-                    {addresses.map((address) => (
+                    {user.addresses.map((address, index) => (
                       <li
-                        key={address.email}
+                        key={index}
                         className='flex justify-between gap-x-6 py-5  border-solid border-2 border-gray-200'>
                         <div className='flex min-w-0 gap-x-4 '>
                           <input
+                            onChange={handleAddress}
                             name='address'
                             type='radio'
+                            value={index}
                             className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600'
                           />
                           <div className='min-w-0 flex-auto '>
@@ -281,7 +303,10 @@ function Checkout() {
                           <input
                             id='cash'
                             name='payments'
+                            onChange={handlePayment}
+                            value='cash'
                             type='radio'
+                            checked={paymentMethod === 'cash'}
                             className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600'
                           />
                           <label
@@ -294,6 +319,9 @@ function Checkout() {
                           <input
                             id='card'
                             name='payments'
+                            onChange={handlePayment}
+                            value='card'
+                            checked={paymentMethod === 'card'}
                             type='radio'
                             className='h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600'
                           />
@@ -392,11 +420,11 @@ function Checkout() {
                       Shipping and taxes calculated at checkout.
                     </p>
                     <div className='mt-6'>
-                      <Link
-                        to={'/checkout'}
-                        className='flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700'>
-                        Checkout
-                      </Link>
+                      <div
+                        onClick={handleOrder}
+                        className='flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700'>
+                        Order Now
+                      </div>
                     </div>
                     <div className='mt-6 flex justify-center text-center text-sm text-gray-500'>
                       <p>
