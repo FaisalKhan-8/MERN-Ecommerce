@@ -1054,21 +1054,12 @@
       "addresses": [
         {
           "name": "Faisal khan",
-          "email": "mdfaisalkhan1500@gmail.com",
-          "phone": "8976119103",
-          "street": "bhartiyaNAGR",
-          "city": "mumbai",
-          "state": "maharastra",
-          "pinCode": "400070"
-        },
-        {
-          "name": "Faisal khan",
           "email": "kfaiz38038@gmail.com",
-          "phone": "8976119103",
-          "street": "bhartiyaNAGR",
           "city": "mumbai",
           "state": "maharastra",
-          "pinCode": "400070"
+          "pinCode": "400070",
+          "phone": "8976119103",
+          "street": "bhartiya nagar kurla"
         }
       ],
       "id": 1
@@ -1078,25 +1069,40 @@
       "password": "Pagal@786",
       "addresses": [],
       "id": 2
+    },
+    {
+      "email": "karan@gmail.com",
+      "password": "Pagal@786",
+      "addresses": [
+        {
+          "name": "Faisal khan",
+          "email": "mdfaisalkhan1500@gmail.com",
+          "phone": "8976119103",
+          "street": "bhartiyaNAGR",
+          "city": "mumbai",
+          "state": "maharastra",
+          "pinCode": "400070"
+        }
+      ],
+      "id": 3
     }
   ],
   "cart": [
     {
-      "title": "iPhone 9",
-      "description": "An apple mobile which is nothing like apple",
-      "price": 549,
-      "discountPercentage": 12.96,
-      "rating": 4.69,
-      "stock": 94,
+      "title": "iPhone X",
+      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+      "price": 899,
+      "discountPercentage": 17.94,
+      "rating": 4.44,
+      "stock": 34,
       "brand": "Apple",
       "category": "smartphones",
-      "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+      "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
       "images": [
-        "https://i.dummyjson.com/data/products/1/1.jpg",
-        "https://i.dummyjson.com/data/products/1/2.jpg",
-        "https://i.dummyjson.com/data/products/1/3.jpg",
-        "https://i.dummyjson.com/data/products/1/4.jpg",
-        "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+        "https://i.dummyjson.com/data/products/2/1.jpg",
+        "https://i.dummyjson.com/data/products/2/2.jpg",
+        "https://i.dummyjson.com/data/products/2/3.jpg",
+        "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
       ],
       "quantity": 1,
       "user": 1,
@@ -1229,6 +1235,333 @@
       },
       "status": "pending",
       "id": 2
+    },
+    {
+      "items": [
+        {
+          "title": "iPhone 9",
+          "description": "An apple mobile which is nothing like apple",
+          "price": 549,
+          "discountPercentage": 12.96,
+          "rating": 4.69,
+          "stock": 94,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/1/1.jpg",
+            "https://i.dummyjson.com/data/products/1/2.jpg",
+            "https://i.dummyjson.com/data/products/1/3.jpg",
+            "https://i.dummyjson.com/data/products/1/4.jpg",
+            "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 1
+        }
+      ],
+      "totalAmount": 549,
+      "totalItems": 1,
+      "user": {
+        "email": "mdfaisalkhan1500@gmail.com",
+        "password": "Pagal@786",
+        "addresses": [
+          {
+            "name": "Faisal khan",
+            "email": "mdfaisalkhan1500@gmail.com",
+            "phone": "8976119103",
+            "street": "bhartiyaNAGR",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070"
+          },
+          {
+            "name": "Faisal khan",
+            "email": "kfaiz38038@gmail.com",
+            "phone": "8976119103",
+            "street": "bhartiyaNAGR",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070"
+          },
+          {
+            "name": "Faisal khan",
+            "email": "mdfaisalkhan1500@gmail.com",
+            "phone": "8976119103",
+            "street": "bhartiyaNAGR",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Faisal khan",
+        "email": "mdfaisalkhan1500@gmail.com",
+        "phone": "8976119103",
+        "street": "bhartiyaNAGR",
+        "city": "mumbai",
+        "state": "maharastra",
+        "pinCode": "400070"
+      },
+      "status": "pending",
+      "id": 3
+    },
+    {
+      "items": [
+        {
+          "title": "OPPOF19",
+          "description": "OPPO F19 is officially announced on April 2021.",
+          "price": 280,
+          "discountPercentage": 17.91,
+          "rating": 4.3,
+          "stock": 123,
+          "brand": "OPPO",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/4/1.jpg",
+            "https://i.dummyjson.com/data/products/4/2.jpg",
+            "https://i.dummyjson.com/data/products/4/3.jpg",
+            "https://i.dummyjson.com/data/products/4/4.jpg",
+            "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 1
+        }
+      ],
+      "totalAmount": 280,
+      "totalItems": 1,
+      "user": {
+        "email": "mdfaisalkhan1500@gmail.com",
+        "password": "Pagal@786",
+        "addresses": [
+          {
+            "name": "Faisal khan",
+            "email": "mdfaisalkhan1500@gmail.com",
+            "phone": "8976119103",
+            "street": "bhartiyaNAGR",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070"
+          },
+          {
+            "name": "Faisal khan",
+            "email": "kfaiz38038@gmail.com",
+            "phone": "8976119103",
+            "street": "bhartiyaNAGR",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070"
+          },
+          {
+            "name": "Faisal khan",
+            "email": "mdfaisalkhan1500@gmail.com",
+            "phone": "8976119103",
+            "street": "bhartiyaNAGR",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070"
+          },
+          {
+            "name": "karan",
+            "email": "karan@gmail.com",
+            "phone": "8976119103",
+            "street": "bhartiyaNAGR",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMethod": "card",
+      "selectedAddress": {
+        "name": "karan",
+        "email": "karan@gmail.com",
+        "phone": "8976119103",
+        "street": "bhartiyaNAGR",
+        "city": "mumbai",
+        "state": "maharastra",
+        "pinCode": "400070"
+      },
+      "status": "pending",
+      "id": 4
+    },
+    {
+      "items": [
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 3,
+          "id": 1
+        }
+      ],
+      "totalAmount": 899,
+      "totalItems": 1,
+      "user": {
+        "email": "karan@gmail.com",
+        "password": "Pagal@786",
+        "addresses": [
+          {
+            "name": "Faisal khan",
+            "email": "mdfaisalkhan1500@gmail.com",
+            "phone": "8976119103",
+            "street": "bhartiyaNAGR",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070"
+          }
+        ],
+        "id": 3
+      },
+      "paymentMethod": "card",
+      "selectedAddress": {
+        "name": "Faisal khan",
+        "email": "mdfaisalkhan1500@gmail.com",
+        "phone": "8976119103",
+        "street": "bhartiyaNAGR",
+        "city": "mumbai",
+        "state": "maharastra",
+        "pinCode": "400070"
+      },
+      "status": "pending",
+      "id": 5
+    },
+    {
+      "items": [
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 1
+        }
+      ],
+      "totalAmount": 899,
+      "totalItems": 1,
+      "user": {
+        "email": "mdfaisalkhan1500@gmail.com",
+        "password": "Pagal@786",
+        "addresses": [
+          {
+            "name": "Faisal khan",
+            "email": "kfaiz38038@gmail.com",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070",
+            "phone": "8976119103",
+            "street": "bhartiya nagar kurla"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Faisal khan",
+        "email": "kfaiz38038@gmail.com",
+        "city": "mumbai",
+        "state": "maharastra",
+        "pinCode": "400070",
+        "phone": "8976119103",
+        "street": "bhartiya nagar kurla"
+      },
+      "status": "pending",
+      "id": 6
+    },
+    {
+      "items": [
+        {
+          "title": "iPhone 9",
+          "description": "An apple mobile which is nothing like apple",
+          "price": 549,
+          "discountPercentage": 12.96,
+          "rating": 4.69,
+          "stock": 94,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/1/1.jpg",
+            "https://i.dummyjson.com/data/products/1/2.jpg",
+            "https://i.dummyjson.com/data/products/1/3.jpg",
+            "https://i.dummyjson.com/data/products/1/4.jpg",
+            "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 1
+        }
+      ],
+      "totalAmount": 549,
+      "totalItems": 1,
+      "user": {
+        "email": "mdfaisalkhan1500@gmail.com",
+        "password": "Pagal@786",
+        "addresses": [
+          {
+            "name": "Faisal khan",
+            "email": "kfaiz38038@gmail.com",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070",
+            "phone": "8976119103",
+            "street": "bhartiya nagar kurla"
+          },
+          {
+            "name": "karan",
+            "email": "karan@gmail.com",
+            "phone": "8976119103",
+            "street": "bhartiya nagar kurla",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMethod": "card",
+      "selectedAddress": {
+        "name": "karan",
+        "email": "karan@gmail.com",
+        "phone": "8976119103",
+        "street": "bhartiya nagar kurla",
+        "city": "mumbai",
+        "state": "maharastra",
+        "pinCode": "400070"
+      },
+      "status": "pending",
+      "id": 7
     }
   ]
 }

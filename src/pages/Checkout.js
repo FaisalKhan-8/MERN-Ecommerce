@@ -9,14 +9,12 @@ import {
   selectItems,
   updateCartAsync,
 } from '../features/cart/cartSlice.js';
-import {
-  selectLoggedInUser,
-  updateUserAsync,
-} from '../features/auth/authSlice.js';
+import { updateUserAsync } from '../features/auth/authSlice.js';
 import {
   createOrderAsync,
   selectCurrentOrder,
 } from '../features/order/orderSlice.js';
+import { selectUserInfo } from '../features/user/userSlice';
 
 function Checkout() {
   const [open, setOpen] = useState(true);
@@ -29,7 +27,7 @@ function Checkout() {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectUserInfo);
   const items = useSelector(selectItems);
   const currentOrder = useSelector(selectCurrentOrder);
   const totalAmount = items.reduce(

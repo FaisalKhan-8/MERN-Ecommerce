@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchLoggedInUserOrderAsync, selectUserOrders } from '../userSlice';
-import { selectLoggedInUser } from '../../auth/authSlice';
+import {
+  fetchLoggedInUserOrderAsync,
+  selectUserInfo,
+  selectUserOrders,
+} from '../userSlice';
 
 export default function UserOrders() {
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectUserInfo);
   const orders = useSelector(selectUserOrders);
 
   useEffect(() => {
@@ -14,18 +17,18 @@ export default function UserOrders() {
 
   return (
     <div>
-      {orders.map((order) => (
+      {orders?.map((order) => (
         <div>
           <div>
             <div className='mx-auto mt-12 bg-white max-w-7xl px-4 sm:px-6 lg:px-8'>
               <div className='border-t border-gray-200 px-4 py-6 sm:px-6'>
-                <h1 className='text-4xl my-5 font-bold tracking-tight text-gray-900'>
+                <h1 className='flex text-4xl my-5 font-bold tracking-tight text-gray-900'>
                   Order # {order.id}
                 </h1>
-                <h3 className='text-xl my-5 font-bold tracking-tight text-red-900'>
+                <h3 className='flex text-xl my-5 py-2 font-bold tracking-tight text-red-900'>
                   Order Status : {order.status}
                 </h3>
-                <div className='flow-root'>
+                <div className='flow-root '>
                   <ul role='list' className='-my-6 divide-y divide-gray-200'>
                     {order.items.map((item) => (
                       <li key={item.id} className='flex py-6'>

@@ -13,8 +13,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from './features/auth/authSlice';
 import PageNotFound from './pages/404';
 import OrderSuccessPage from './pages/OrderSuccessPage';
-
+import UserProfilePage from './pages/UserProfilePage';
 import UserOrdersPage from './pages/UserOrdersPage';
+import { fetchLoggedInUserAsync } from './features/user/userSlice';
+import Logout from './features/auth/components/Logout';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +26,7 @@ function App() {
   useEffect(() => {
     if (user) {
       dispatch(fetchItemsByUserIdAsync(user.id));
+      dispatch(fetchLoggedInUserAsync(user.id));
     }
   }, [dispatch, user]);
 
@@ -42,8 +46,11 @@ function App() {
           element={<Protected>{<ProductDetailPage />}</Protected>}
         />
         <Route path='order-success/:id' element={<OrderSuccessPage />} />
-        <Route path='/orders' element={<UserOrdersPage />} /> // we will add
-        page later right now using component directly
+        <Route path='/orders' element={<UserOrdersPage />} />
+        // we will add page later right now using component directly
+        <Route path='/profile' element={<UserProfilePage />} />
+        <Route path='/logout' element={<Logout />} />
+        <Route path='/forgot-password' element={<ForgotPasswordPage />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </div>

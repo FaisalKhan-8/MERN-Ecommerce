@@ -5,7 +5,7 @@ function UserOrdersPage() {
   return (
     <div>
       <NavBar>
-        <h1 className='mx-auto text-2xl font-semibold'>My Orders</h1>
+        <h1 className='flex mx-auto text-2xl font-semibold'>My Orders</h1>
         <UserOrders></UserOrders>
       </NavBar>
     </div>
