@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import SignupPage from './pages/SignupPage';
-import { Route, Routes } from 'react-router';
+import { Route, Routes, Link } from 'react-router';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from './features/auth/authSlice';
@@ -18,6 +18,10 @@ import UserOrdersPage from './pages/UserOrdersPage';
 import { fetchLoggedInUserAsync } from './features/user/userSlice';
 import Logout from './features/auth/components/Logout';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ProtectedAdmin from './features/auth/components/ProtectedAdmin';
+import AdminHome from './pages/AdminHome';
+import AdminProductDetailPage from './pages/AdminProductDetailPage';
+import AdminProductFormPage from './pages/AdminProductFormPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -34,8 +38,27 @@ function App() {
     <div className='App'>
       <Routes>
         <Route index path='/' element={<Protected>{<Home />}</Protected>} />
+        <Route
+          index
+          path='/admin'
+          element={<ProtectedAdmin>{<AdminHome />}</ProtectedAdmin>}
+        />
         <Route path='/signup' element={<SignupPage />} />
         <Route path='/login' element={<LoginPage />} />
+        <Route
+          path='/admin/product-detail/:id'
+          element={
+            <ProtectedAdmin>{<AdminProductDetailPage />}</ProtectedAdmin>
+          }
+        />
+        <Route
+          path='/admin/product-form'
+          element={<ProtectedAdmin>{<AdminProductFormPage />}</ProtectedAdmin>}
+        />
+        <Route
+          path='/admin/product-form/edit/:id'
+          element={<ProtectedAdmin>{<AdminProductFormPage />}</ProtectedAdmin>}
+        />
         <Route path='/cart' element={<Protected>{<CartPage />}</Protected>} />
         <Route
           path='/checkout'
