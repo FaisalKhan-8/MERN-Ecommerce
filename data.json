@@ -1142,28 +1142,7 @@
       "id": 3
     }
   ],
-  "cart": [
-    {
-      "title": "mcA ",
-      "description": "FJKDH",
-      "brand": "Apple",
-      "category": "laptops",
-      "price": 10000,
-      "discountPercentage": 10,
-      "stock": 2,
-      "thumbnail": "https://rukminim2.flixcart.com/image/416/416/kp5sya80/screen-guard/tempered-glass/o/v/n/apple-macbook-air-m1-13-3-inch-lightwings-original-imag3gh5xftgbpg3.jpeg?q=70",
-      "images": [
-        "https://rukminim2.flixcart.com/image/416/416/kruyw7k0/computer/j/q/o/na-thin-and-light-laptop-apple-original-imag5jt7uezqkefz.jpeg?q=70",
-        "https://rukminim2.flixcart.com/image/416/416/kruyw7k0/computer/p/s/p/na-thin-and-light-laptop-apple-original-imag5jt7zpmhsrpm.jpeg?q=70",
-        "https://rukminim2.flixcart.com/image/416/416/kruyw7k0/computer/7/s/m/na-thin-and-light-laptop-apple-original-imag5jt7khzzmh4w.jpeg?q=70",
-        "https://rukminim2.flixcart.com/image/416/416/kp5sya80/screen-guard/tempered-glass/o/v/n/apple-macbook-air-m1-13-3-inch-lightwings-original-imag3gh5xftgbpg3.jpeg?q=70"
-      ],
-      "rating": 0,
-      "quantity": 1,
-      "user": 1,
-      "id": 2
-    }
-  ],
+  "cart": [],
   "orders": [
     {
       "items": [
@@ -1225,7 +1204,7 @@
         "state": "maharastra",
         "pinCode": "400070"
       },
-      "status": "pending",
+      "status": "dispatched",
       "id": 1
     },
     {
@@ -1617,6 +1596,81 @@
       },
       "status": "pending",
       "id": 7
+    },
+    {
+      "items": [
+        {
+          "title": "mcA ",
+          "description": "FJKDH",
+          "brand": "Apple",
+          "category": "laptops",
+          "price": 10000,
+          "discountPercentage": 10,
+          "stock": 2,
+          "thumbnail": "https://rukminim2.flixcart.com/image/416/416/kp5sya80/screen-guard/tempered-glass/o/v/n/apple-macbook-air-m1-13-3-inch-lightwings-original-imag3gh5xftgbpg3.jpeg?q=70",
+          "images": [
+            "https://rukminim2.flixcart.com/image/416/416/kruyw7k0/computer/j/q/o/na-thin-and-light-laptop-apple-original-imag5jt7uezqkefz.jpeg?q=70",
+            "https://rukminim2.flixcart.com/image/416/416/kruyw7k0/computer/p/s/p/na-thin-and-light-laptop-apple-original-imag5jt7zpmhsrpm.jpeg?q=70",
+            "https://rukminim2.flixcart.com/image/416/416/kruyw7k0/computer/7/s/m/na-thin-and-light-laptop-apple-original-imag5jt7khzzmh4w.jpeg?q=70",
+            "https://rukminim2.flixcart.com/image/416/416/kp5sya80/screen-guard/tempered-glass/o/v/n/apple-macbook-air-m1-13-3-inch-lightwings-original-imag3gh5xftgbpg3.jpeg?q=70"
+          ],
+          "rating": 0,
+          "quantity": 1,
+          "user": 1,
+          "id": 2
+        },
+        {
+          "title": "iPhone X",
+          "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+          "price": 899,
+          "discountPercentage": 17.94,
+          "rating": 4.44,
+          "stock": 34,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/2/1.jpg",
+            "https://i.dummyjson.com/data/products/2/2.jpg",
+            "https://i.dummyjson.com/data/products/2/3.jpg",
+            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 3
+        }
+      ],
+      "totalAmount": 10899,
+      "totalItems": "738[object Object]",
+      "user": {
+        "email": "mdfaisalkhan1500@gmail.com",
+        "password": "Pagal@786",
+        "addresses": [
+          {
+            "name": "Faisal khan",
+            "email": "kfaiz38038@gmail.com",
+            "city": "mumbai",
+            "state": "maharastra",
+            "pinCode": "400070",
+            "phone": "8976119103",
+            "street": "bhartiya nagar kurla"
+          }
+        ],
+        "role": "admin",
+        "id": 1
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Faisal khan",
+        "email": "kfaiz38038@gmail.com",
+        "city": "mumbai",
+        "state": "maharastra",
+        "pinCode": "400070",
+        "phone": "8976119103",
+        "street": "bhartiya nagar kurla"
+      },
+      "status": "pending",
+      "id": 8
     }
   ]
 }

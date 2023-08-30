@@ -15,6 +15,7 @@ import {
   selectCurrentOrder,
 } from '../features/order/orderSlice.js';
 import { selectUserInfo } from '../features/user/userSlice';
+import { discountedPrice } from '../app/constants';
 
 function Checkout() {
   const [open, setOpen] = useState(true);
@@ -34,7 +35,9 @@ function Checkout() {
     (amount, item) => item.price * item.quantity + amount,
     0
   );
-  const totalItems = items.reduce((total, item) => item.quantity + total, 0);
+  const totalItems = items.reduce(
+    (amount, item) => discountedPrice(item) * item.quantity + amount
+  );
 
   const handleQuantity = (e, item) => {
     dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
@@ -364,7 +367,9 @@ function Checkout() {
                                   <h3>
                                     <a href={item.href}>{item.title}</a>
                                   </h3>
-                                  <p className='ml-4'>${item.price}</p>
+                                  <p className='ml-4'>
+                                    ${discountedPrice(item)}
+                                  </p>
                                 </div>
                                 <p className='mt-1 flex  text-sm text-gray-500'>
                                   {item.brand}
