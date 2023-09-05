@@ -13,8 +13,6 @@ export default function Signup() {
   } = useForm();
   const user = useSelector(selectLoggedInUser);
 
-  console.log(errors);
-
   return (
     <>
       {user && <Navigate to='/' replace={true}></Navigate>}
@@ -45,7 +43,6 @@ export default function Signup() {
                   //TODO: this role can be directly given on backend
                 })
               );
-              console.log(data);
             })}>
             <div>
               <label

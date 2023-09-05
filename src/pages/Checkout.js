@@ -9,12 +9,12 @@ import {
   selectItems,
   updateCartAsync,
 } from '../features/cart/cartSlice.js';
-import { updateUserAsync } from '../features/auth/authSlice.js';
+import { selectUserInfo, updateUserAsync } from '../features/user/userSlice';
 import {
   createOrderAsync,
   selectCurrentOrder,
 } from '../features/order/orderSlice.js';
-import { selectUserInfo } from '../features/user/userSlice';
+
 import { discountedPrice } from '../app/constants';
 
 function Checkout() {
@@ -32,15 +32,13 @@ function Checkout() {
   const items = useSelector(selectItems);
   const currentOrder = useSelector(selectCurrentOrder);
   const totalAmount = items.reduce(
-    (amount, item) => item.price * item.quantity + amount,
+    (amount, item) => discountedPrice(item.product) * item.quantity + amount,
     0
   );
-  const totalItems = items.reduce(
-    (amount, item) => discountedPrice(item) * item.quantity + amount
-  );
+  const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
   const handleQuantity = (e, item) => {
-    dispatch(updateCartAsync({ ...item, quantity: +e.target.value }));
+    dispatch(updateCartAsync({ id: item.id, quantity: +e.target.value }));
   };
 
   const handleRemove = (e, id) => {
@@ -61,7 +59,7 @@ function Checkout() {
       items,
       totalAmount,
       totalItems,
-      user,
+      user: user.id,
       paymentMethod,
       selectedAddress,
       status: 'pending',
@@ -87,7 +85,6 @@ function Checkout() {
               className=' bg-white px-6 py-5 mt-12'
               noValidate
               onSubmit={handleSubmit((data) => {
-                console.log(data);
                 dispatch(
                   updateUserAsync({
                     ...user,
@@ -355,8 +352,8 @@ function Checkout() {
                           <li key={item.id} className='flex py-6'>
                             <div className='h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200'>
                               <img
-                                src={item.thumbnail}
-                                alt={item.title}
+                                src={item.product.thumbnail}
+                                alt={item.product.title}
                                 className='h-full w-full object-cover object-center'
                               />
                             </div>
@@ -365,14 +362,16 @@ function Checkout() {
                               <div>
                                 <div className='flex justify-between text-base font-medium text-gray-900'>
                                   <h3>
-                                    <a href={item.href}>{item.title}</a>
+                                    <a href={item.product.id}>
+                                      {item.product.title}
+                                    </a>
                                   </h3>
                                   <p className='ml-4'>
-                                    ${discountedPrice(item)}
+                                    ${discountedPrice(item.product)}
                                   </p>
                                 </div>
                                 <p className='mt-1 flex  text-sm text-gray-500'>
-                                  {item.brand}
+                                  {item.product.brand}
                                 </p>
                               </div>
                               <div className='flex flex-1 items-end justify-between text-sm'>
