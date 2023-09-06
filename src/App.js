@@ -10,7 +10,11 @@ import SignupPage from './pages/SignupPage';
 import { Route, Routes, Link } from 'react-router';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectLoggedInUser } from './features/auth/authSlice';
+import {
+  checkAuthAsync,
+  selectLoggedInUser,
+  selectUserChecked,
+} from './features/auth/authSlice';
 import PageNotFound from './pages/404';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 import UserProfilePage from './pages/UserProfilePage';
@@ -34,75 +38,85 @@ const options = {
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
+  const userChecked = useSelector(selectUserChecked);
+
+  useEffect(() => {
+    dispatch(checkAuthAsync());
+  }, [dispatch]);
 
   useEffect(() => {
     if (user) {
-      dispatch(fetchItemsByUserIdAsync(user.id));
-      dispatch(fetchLoggedInUserAsync(user.id));
+      dispatch(fetchItemsByUserIdAsync());
+      dispatch(fetchLoggedInUserAsync());
     }
   }, [dispatch, user]);
 
   return (
     <div className='App'>
-      <Provider template={AlertTemplate} {...options}>
-        <Routes>
-          <Route index path='/' element={<Protected>{<Home />}</Protected>} />
-          <Route
-            index
-            path='/admin'
-            element={<ProtectedAdmin>{<AdminHome />}</ProtectedAdmin>}
-          />
-          <Route path='/signup' element={<SignupPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route
-            path='/admin/product-detail/:id'
-            element={
-              <ProtectedAdmin>{<AdminProductDetailPage />}</ProtectedAdmin>
-            }
-          />
-          <Route
-            path='/admin/product-form'
-            element={
-              <ProtectedAdmin>{<AdminProductFormPage />}</ProtectedAdmin>
-            }
-          />
-          <Route
-            path='/admin/orders'
-            element={<ProtectedAdmin>{<AdminOrdersPage />}</ProtectedAdmin>}
-          />
-          <Route
-            path='/admin/product-form/edit/:id'
-            element={
-              <ProtectedAdmin>{<AdminProductFormPage />}</ProtectedAdmin>
-            }
-          />
-          <Route path='/cart' element={<Protected>{<CartPage />}</Protected>} />
-          <Route
-            path='/checkout'
-            element={<Protected>{<Checkout />}</Protected>}
-          />
-          <Route
-            path='/product-detail/:id'
-            element={<Protected>{<ProductDetailPage />}</Protected>}
-          />
-          <Route
-            path='order-success/:id'
-            element={<Protected>{<OrderSuccessPage />}</Protected>}
-          />
-          <Route
-            path='/orders'
-            element={<Protected>{<UserOrdersPage />}</Protected>}
-          />
-          // we will add page later right now using component directly
-          <Route
-            path='/profile'
-            element={<Protected>{<UserProfilePage />}</Protected>}
-          />
-          <Route path='/logout' element={<Logout />} />
-          <Route path='/forgot-password' element={<ForgotPasswordPage />} />
-          <Route path='*' element={<PageNotFound />} />
-        </Routes>
-      </Provider>
+      {userChecked && (
+        <Provider template={AlertTemplate} {...options}>
+          <Routes>
+            <Route index path='/' element={<Protected>{<Home />}</Protected>} />
+            <Route
+              index
+              path='/admin'
+              element={<ProtectedAdmin>{<AdminHome />}</ProtectedAdmin>}
+            />
+            <Route path='/signup' element={<SignupPage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route
+              path='/admin/product-detail/:id'
+              element={
+                <ProtectedAdmin>{<AdminProductDetailPage />}</ProtectedAdmin>
+              }
+            />
+            <Route
+              path='/admin/product-form'
+              element={
+                <ProtectedAdmin>{<AdminProductFormPage />}</ProtectedAdmin>
+              }
+            />
+            <Route
+              path='/admin/orders'
+              element={<ProtectedAdmin>{<AdminOrdersPage />}</ProtectedAdmin>}
+            />
+            <Route
+              path='/admin/product-form/edit/:id'
+              element={
+                <ProtectedAdmin>{<AdminProductFormPage />}</ProtectedAdmin>
+              }
+            />
+            <Route
+              path='/cart'
+              element={<Protected>{<CartPage />}</Protected>}
+            />
+            <Route
+              path='/checkout'
+              element={<Protected>{<Checkout />}</Protected>}
+            />
+            <Route
+              path='/product-detail/:id'
+              element={<Protected>{<ProductDetailPage />}</Protected>}
+            />
+            <Route
+              path='order-success/:id'
+              element={<Protected>{<OrderSuccessPage />}</Protected>}
+            />
+            <Route
+              path='/orders'
+              element={<Protected>{<UserOrdersPage />}</Protected>}
+            />
+            // we will add page later right now using component directly
+            <Route
+              path='/profile'
+              element={<Protected>{<UserProfilePage />}</Protected>}
+            />
+            <Route path='/logout' element={<Logout />} />
+            <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+            <Route path='*' element={<PageNotFound />} />
+          </Routes>
+        </Provider>
+      )}
     </div>
   );
 }
