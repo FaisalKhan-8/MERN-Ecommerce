@@ -6,6 +6,7 @@ const initialState = {
   loggedInUserToken: null, // this should only contain user identity => 'id'/'role'
   status: 'idle',
   error: null,
+  userChecked: false,
 };
 
 export const createUserAsync = createAsyncThunk(
@@ -69,7 +70,6 @@ export const authSlice = createSlice({
         state.status = 'idle';
         state.loggedInUserToken = action.payload;
       })
-
       .addCase(checkAuthAsync.pending, (state) => {
         state.status = 'loading';
       })
