@@ -54,7 +54,7 @@ export default function UserOrders() {
                                   </a>
                                 </h3>
                                 <p className='ml-4'>
-                                  ${discountedPrice(item.product)}
+                                  ${discountedPrice(item.product)}{' '}
                                 </p>
                               </div>
                               <p className='flex mt-1 text-sm text-gray-500'>

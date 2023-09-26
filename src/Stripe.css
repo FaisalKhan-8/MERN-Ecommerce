@@ -8,6 +8,7 @@
   padding: 40px;
 }
 
+
 #payment-message {
   color: rgb(105, 115, 134);
   font-size: 16px;
@@ -114,5 +115,7 @@
   form {
     width: 80vw;
     min-width: initial;
+    
   }
+  
 }

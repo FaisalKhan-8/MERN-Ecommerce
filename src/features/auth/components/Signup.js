@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { selectLoggedInUser, createUserAsync } from '../authSlice';
@@ -6,12 +5,14 @@ import { Link, Navigate } from 'react-router-dom';
 
 export default function Signup() {
   const dispatch = useDispatch();
+
+  const user = useSelector(selectLoggedInUser);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const user = useSelector(selectLoggedInUser);
 
   return (
     <>
@@ -19,11 +20,7 @@ export default function Signup() {
 
       <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
         <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
-          <img
-            className='mx-auto h-10 w-auto'
-            src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-            alt='Your Company'
-          />
+          <img className='mx-auto w-28 h-28' src='/logo.png' alt='logo' />
           <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
             Login To Your Account
           </h2>
@@ -43,6 +40,7 @@ export default function Signup() {
                   //TODO: this role can be directly given on backend
                 })
               );
+              console.log(data);
             })}>
             <div>
               <label

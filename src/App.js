@@ -7,7 +7,7 @@ import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import SignupPage from './pages/SignupPage';
-import { Route, Routes, Link } from 'react-router';
+import { Route, Routes } from 'react-router';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -30,6 +30,7 @@ import AdminOrdersPage from './pages/AdminOrdersPage';
 import { positions, Provider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import StripeCheckout from './pages/StripeCheckout';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 const options = {
   timeout: 5000,
@@ -109,20 +110,21 @@ function App() {
                 element={<Protected>{<StripeCheckout />}</Protected>}
               />
               <Route
-                path='order-success/:id'
+                path='=order-success/:id'
                 element={<Protected>{<OrderSuccessPage />}</Protected>}
               />
               <Route
-                path='/orders'
+                path='/my-orders'
                 element={<Protected>{<UserOrdersPage />}</Protected>}
               />
-              // we will add page later right now using component directly
+              {/* // we will add page later right now using component directly */}
               <Route
                 path='/profile'
                 element={<Protected>{<UserProfilePage />}</Protected>}
               />
               <Route path='/logout' element={<Logout />} />
               <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+              <Route path='/reset-password' element={<ResetPasswordPage />} />
               <Route path='*' element={<PageNotFound />} />
             </Routes>
           </Provider>

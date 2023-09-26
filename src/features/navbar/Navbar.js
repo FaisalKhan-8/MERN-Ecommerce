@@ -1,4 +1,4 @@
-import { Children, Fragment } from 'react';
+import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
   Bars3Icon,
@@ -8,23 +8,17 @@ import {
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectItems } from '../cart/cartSlice';
-import { selectLoggedInUser } from '../auth/authSlice';
+
 import { selectUserInfo } from '../user/userSlice';
 
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-};
 const navigation = [
   { name: 'Products', link: '/', user: true },
-  { name: 'Admin Products', link: '/admin', admin: true },
+  { name: 'Products', link: '/admin', admin: true },
   { name: 'Orders', link: '/admin/orders', admin: true },
 ];
 const userNavigation = [
   { name: 'My Profile', link: '/profile' },
-  { name: 'My Orders', link: '/orders' },
+  { name: 'My Orders', link: '/my-orders' },
   { name: 'Sign out', link: '/logout' },
 ];
 
@@ -43,15 +37,15 @@ function NavBar({ children }) {
           <Disclosure as='nav' className='bg-gray-800'>
             {({ open }) => (
               <>
-                <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
+                <div className='mx-auto max-w-8xl px-4 sm:px-6 lg:px-8'>
                   <div className='flex h-16 items-center justify-between'>
                     <div className='flex items-center'>
                       <div className='flex-shrink-0'>
                         <Link to={'/'}>
                           <img
-                            className='h-8 w-8'
-                            src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500'
-                            alt='Your Company'
+                            className='mx-auto w-10 h-10'
+                            src='/logo.png'
+                            alt='logo'
                           />
                         </Link>
                       </div>
@@ -137,6 +131,7 @@ function NavBar({ children }) {
                         </Menu>
                       </div>
                     </div>
+
                     <div className='-mr-2 flex md:hidden'>
                       {/* Mobile menu button */}
                       <Disclosure.Button className='relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
@@ -159,12 +154,41 @@ function NavBar({ children }) {
                 </div>
 
                 <Disclosure.Panel className='md:hidden'>
+                  <div className='flex items-center px-2 '>
+                    <div className='flex-shrink-0'></div>
+                    <div className='ml-3'>
+                      <div className='text-base font-medium leading-none text-white'>
+                        {/* this should come from userInfo */}
+                        {userInfo.name}
+                      </div>
+                      <div className='text-lg font-medium leading-none text-green-400'>
+                        {userInfo.email}
+                      </div>
+                    </div>
+                    <Link to={'/cart'}>
+                      <button
+                        type='button'
+                        className='relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
+                        <span className='absolute -inset-1.5' />
+
+                        <ShoppingCartIcon
+                          className='h-6 w-6 mx-4'
+                          aria-hidden='true'
+                        />
+                      </button>
+                    </Link>
+                    {items.length > 0 && (
+                      <span className='inline-flex items-center rounded-md relative mb-10 -ml-3 bg-red-50 px-2 py-1 text-xs  font-medium text-red-700 ring-1 ring-inset ring-red-600/10'>
+                        {items.length}
+                      </span>
+                    )}
+                  </div>
                   <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
                     {navigation.map((item) => (
                       <Disclosure.Button
                         key={item.name}
                         as='a'
-                        href={item.href}
+                        href={item.link}
                         className={classNames(
                           item.current
                             ? 'bg-gray-900 text-white'
@@ -177,47 +201,12 @@ function NavBar({ children }) {
                     ))}
                   </div>
                   <div className='border-t border-gray-700 pb-3 pt-4'>
-                    <div className='flex items-center px-5'>
-                      <div className='flex-shrink-0'>
-                        <img
-                          className='h-10 w-10 rounded-full'
-                          src={userInfo.imageUrl}
-                          alt=''
-                        />
-                      </div>
-                      <div className='ml-3'>
-                        <div className='text-base font-medium leading-none text-white'>
-                          {/* this should come from userInfo */}
-                          {userInfo.name}
-                        </div>
-                        <div className='text-sm font-medium leading-none text-gray-400'>
-                          {userInfo.email}
-                        </div>
-                      </div>
-                      <Link to={'/cart'}>
-                        <button
-                          type='button'
-                          className='relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
-                          <span className='absolute -inset-1.5' />
-
-                          <ShoppingCartIcon
-                            className='h-6 w-6'
-                            aria-hidden='true'
-                          />
-                        </button>
-                      </Link>
-                      {items.length > 0 && (
-                        <span className='inline-flex items-center rounded-md relative mb-10 -ml-3 bg-red-50 px-2 py-1 text-xs  font-medium text-red-700 ring-1 ring-inset ring-red-600/10'>
-                          {items.length}
-                        </span>
-                      )}
-                    </div>
                     <div className='mt-3 space-y-1 px-2'>
                       {userNavigation.map((item) => (
                         <Disclosure.Button
                           key={item.name}
                           as='a'
-                          href={item.href}
+                          href={item.link}
                           className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'>
                           {item.name}
                         </Disclosure.Button>
@@ -232,7 +221,7 @@ function NavBar({ children }) {
           <header className='bg-white shadow'>
             <div className='mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8'>
               <h1 className='text-3xl font-bold tracking-tight text-gray-900'>
-                E-Commerce
+                BeatShop
               </h1>
             </div>
           </header>

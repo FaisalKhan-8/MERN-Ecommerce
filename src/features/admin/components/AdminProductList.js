@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import productSlice, {
+import {
   fetchBrandsAsync,
   fetchCategoriesAsync,
   fetchProductsByFiltersAsync,
@@ -24,12 +24,22 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from '@heroicons/react/20/solid';
-import { ITEM_PER_PAGE, discountedPrice } from '../../../app/constants';
+import { ITEMS_PER_PAGE, discountedPrice } from '../../../app/constants';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
-  { name: 'Price: Low to High', sort: 'price', order: 'asc', current: false },
-  { name: 'Price: High to Low', sort: 'price', order: 'desc', current: false },
+  {
+    name: 'Price: Low to High',
+    sort: 'discountPrice',
+    order: 'asc',
+    current: false,
+  },
+  {
+    name: 'Price: High to Low',
+    sort: 'discountPrice',
+    order: 'desc',
+    current: false,
+  },
 ];
 
 function classNames(...classes) {
@@ -62,7 +72,6 @@ export default function AdminProductList() {
   const handleFilter = (e, section, option) => {
     console.log(e.target.checked);
     const newFilter = { ...filter };
-    // TODO : on server it will support multiple categories
     if (e.target.checked) {
       if (newFilter[section.id]) {
         newFilter[section.id].push(option.value);
@@ -92,7 +101,7 @@ export default function AdminProductList() {
   };
 
   useEffect(() => {
-    const pagination = { _page: page, _limit: ITEM_PER_PAGE };
+    const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
     dispatch(
       fetchProductsByFiltersAsync({ filter, sort, pagination, admin: true })
     );
@@ -194,10 +203,10 @@ export default function AdminProductList() {
               {/* Product grid */}
 
               <div className='lg:col-span-3'>
-                <div className='flex mr-4'>
+                <div>
                   <Link
                     to='/admin/product-form'
-                    className=' rounded-md mx-10 my-5 bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
+                    className='rounded-md mx-10 my-5 bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>
                     Add New Product
                   </Link>
                 </div>
@@ -386,7 +395,7 @@ function DesktopFilter({ handleFilter, filters }) {
 }
 
 function Pagination({ page, setPage, handlePage, totalItems }) {
-  const totalPages = Math.ceil(totalItems / ITEM_PER_PAGE);
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
   return (
     <div className='flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6'>
       <div className='flex flex-1 justify-between sm:hidden'>
@@ -406,13 +415,13 @@ function Pagination({ page, setPage, handlePage, totalItems }) {
           <p className='text-sm text-gray-700'>
             Showing{' '}
             <span className='font-medium'>
-              {(page - 1) * ITEM_PER_PAGE + 1}
+              {(page - 1) * ITEMS_PER_PAGE + 1}
             </span>{' '}
             to{' '}
             <span className='font-medium'>
-              {page * ITEM_PER_PAGE > totalItems
+              {page * ITEMS_PER_PAGE > totalItems
                 ? totalItems
-                : page * ITEM_PER_PAGE}
+                : page * ITEMS_PER_PAGE}
             </span>{' '}
             of <span className='font-medium'>{totalItems}</span> results
           </p>
@@ -464,7 +473,7 @@ function ProductGrid({ products }) {
           {products.map((product) => (
             <div key={product.id}>
               <Link to={`/product-detail/${product.id}`}>
-                <div className='group relative border-solid border-2 p-2 rounded-lg border-gray-200 shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px]'>
+                <div className='group relative border-solid border-2 p-2 border-gray-200'>
                   <div className='min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60'>
                     <img
                       src={product.thumbnail}
@@ -483,14 +492,14 @@ function ProductGrid({ products }) {
                           {product.title}
                         </div>
                       </h3>
-                      <p className='flex mt-1 text-sm text-gray-500'>
-                        <StarIcon className='w-5 h-5 inline mr-1'></StarIcon>
+                      <p className='mt-1 text-sm text-gray-500'>
+                        <StarIcon className='w-6 h-6 inline'></StarIcon>
                         <span className=' align-bottom'>{product.rating}</span>
                       </p>
                     </div>
                     <div>
                       <p className='text-sm block font-medium text-gray-900'>
-                        ${discountedPrice(product)}
+                        $ {discountedPrice(product)}
                       </p>
                       <p className='text-sm block line-through font-medium text-gray-400'>
                         ${product.price}
@@ -499,21 +508,17 @@ function ProductGrid({ products }) {
                   </div>
                   {product.deleted && (
                     <div>
-                      <p className=' flex font-semibold text-sm text-red-400'>
-                        product deleted
-                      </p>
+                      <p className='text-sm text-red-400'>product deleted</p>
                     </div>
                   )}
                   {product.stock <= 0 && (
                     <div>
-                      <p className='flex font-semibold text-sm text-red-400'>
-                        out of stock
-                      </p>
+                      <p className='text-sm text-red-400'>out of stock</p>
                     </div>
                   )}
                 </div>
               </Link>
-              <div className='mt-5 flex'>
+              <div className='mt-5'>
                 <Link
                   to={`/admin/product-form/edit/${product.id}`}
                   className='rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>

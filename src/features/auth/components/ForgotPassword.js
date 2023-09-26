@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
-import { checkUserAsync } from '../authSlice';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetPasswordRequestAsync, selectMailSent } from '../authSlice';
 
 export default function ForgotPassword() {
+  const mailSent = useSelector(selectMailSent);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -16,11 +18,7 @@ export default function ForgotPassword() {
     <>
       <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
         <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
-          <img
-            className='mx-auto h-10 w-auto'
-            src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-            alt='Your Company'
-          />
+          <img className='mx-auto h-10 w-auto' src='/logo.png' alt='logo' />
           <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
             Enter email to reset password
           </h2>
@@ -31,7 +29,7 @@ export default function ForgotPassword() {
             noValidate
             onSubmit={handleSubmit((data) => {
               console.log(data);
-              // TODO : implementation on backend with email
+              dispatch(resetPasswordRequestAsync(data.email));
             })}
             className='space-y-6'>
             <div>
@@ -56,6 +54,7 @@ export default function ForgotPassword() {
                 {errors.email && (
                   <p className='text-red-500'>{errors.email.message}</p>
                 )}
+                {mailSent && <p className='text-green-500'>Mail Sent</p>}
               </div>
             </div>
 

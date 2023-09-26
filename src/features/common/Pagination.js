@@ -1,8 +1,8 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
-import { ITEM_PER_PAGE } from '../../app/constants';
+import { ITEMS_PER_PAGE } from '../../app/constants';
 
 export default function Pagination({ page, setPage, handlePage, totalItems }) {
-  const totalPages = Math.ceil(totalItems / ITEM_PER_PAGE);
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
   return (
     <div className='flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6'>
       <div className='flex flex-1 justify-between sm:hidden'>
@@ -22,13 +22,13 @@ export default function Pagination({ page, setPage, handlePage, totalItems }) {
           <p className='text-sm text-gray-700'>
             Showing{' '}
             <span className='font-medium'>
-              {(page - 1) * ITEM_PER_PAGE + 1}
+              {(page - 1) * ITEMS_PER_PAGE + 1}
             </span>{' '}
             to{' '}
             <span className='font-medium'>
-              {page * ITEM_PER_PAGE > totalItems
+              {page * ITEMS_PER_PAGE > totalItems
                 ? totalItems
-                : page * ITEM_PER_PAGE}
+                : page * ITEMS_PER_PAGE}
             </span>{' '}
             of <span className='font-medium'>{totalItems}</span> results
           </p>

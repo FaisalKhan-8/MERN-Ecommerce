@@ -1,15 +1,14 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  fetchAllProductsAsync,
   fetchBrandsAsync,
   fetchCategoriesAsync,
   fetchProductsByFiltersAsync,
   selectAllProducts,
   selectBrands,
   selectCategories,
-  selectTotalItems,
   selectProductListStatus,
+  selectTotalItems,
 } from '../productSlice';
 
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
@@ -27,14 +26,24 @@ import {
   Squares2X2Icon,
 } from '@heroicons/react/20/solid';
 import { Link } from 'react-router-dom';
-import { ITEM_PER_PAGE, discountedPrice } from '../../../app/constants';
+import { ITEMS_PER_PAGE } from '../../../app/constants';
 import Pagination from '../../common/Pagination';
 import { Grid } from 'react-loader-spinner';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
-  { name: 'Price: Low to High', sort: 'price', order: 'asc', current: false },
-  { name: 'Price: High to Low', sort: 'price', order: 'desc', current: false },
+  {
+    name: 'Price: Low to High',
+    sort: 'discountPrice',
+    order: 'asc',
+    current: false,
+  },
+  {
+    name: 'Price: High to Low',
+    sort: 'discountPrice',
+    order: 'desc',
+    current: false,
+  },
 ];
 
 function classNames(...classes) {
@@ -70,8 +79,8 @@ export default function ProductList() {
   const [page, setPage] = useState(1);
 
   const handleFilter = (e, section, option) => {
+    console.log(e.target.checked);
     const newFilter = { ...filter };
-    // TODO: on server it will support multiple categories
     if (e.target.checked) {
       if (newFilter[section.id]) {
         newFilter[section.id].push(option.value);
@@ -79,11 +88,14 @@ export default function ProductList() {
         newFilter[section.id] = [option.value];
       }
     } else {
-      const index = newFilter[section.id].find((el) => el === option.value);
+      const index = newFilter[section.id].findIndex(
+        (el) => el === option.value
+      );
       newFilter[section.id].splice(index, 1);
     }
+    console.log({ newFilter });
+
     setFilter(newFilter);
-    console.log(section.id, option.value);
   };
 
   const handleSort = (e, option) => {
@@ -96,9 +108,8 @@ export default function ProductList() {
   };
 
   useEffect(() => {
-    const pagination = { _page: page, _limit: ITEM_PER_PAGE };
+    const pagination = { _page: page, _limit: ITEMS_PER_PAGE };
     dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination }));
-    // TODO : Server will filter deleted products
   }, [dispatch, filter, sort, page]);
 
   // creating  useEffect to reset the page for pagination 1
@@ -449,10 +460,18 @@ function ProductGrid({ products, status }) {
                         ${product.price}
                       </p>
                       <p className='text-sm font-medium line-through text-gray-400'>
-                        ${discountedPrice(product)}
+                        ${product.discountPrice}
+                      </p>
+                      <p className='text-sm block line-through font-medium text-gray-400'>
+                        ${product.price}
                       </p>
                     </div>
                   </div>
+                  {product.deleted && (
+                    <div>
+                      <p className='text-sm text-red-400'>product deleted</p>
+                    </div>
+                  )}
                   {product.stock <= 0 && (
                     <div>
                       <p className='text-sm text-red-400'>out of stock</p>
